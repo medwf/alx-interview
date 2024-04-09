@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 
+"""
+a function that return list of list pascal triangle
+"""
+
+
 def pascal_triangle(n):
     """
     This function:
