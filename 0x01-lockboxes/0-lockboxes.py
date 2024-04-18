@@ -4,32 +4,32 @@ create methods canUnlockAll:
     method that determines if all the boxes can be opened.
 """
 
-
 def canUnlockAll(boxes):
     """
-    This function determines if all the boxes can be opened.
+    Check if it's possible to unlock all the boxes based on a set of keys.
 
-    Args:
-      boxes: A list of lists, where each inner list represents the keys
-        a box can open.
+    Parameters:
+    - boxes (List[List[int]]): A list of lists.
 
     Returns:
-      True if all boxes can be opened, False otherwise.
+    - bool: True if all boxes can be unlocked, False otherwise.
     """
-    # Initialize a set to track visited boxes (opened boxes).
-    visited = set()
+    boxesKeys = []
+    len_boxes = len(boxes)
+    count = 0
 
-    # Function to explore keys and mark visited boxes.
-    def explore(box_num):
-        if box_num in visited or box_num >= len(boxes) or box_num < 0:
-            return
-        visited.add(box_num)
+    for key in boxes[0]:
+        if key not in boxesKeys and 0 < key < len_boxes:
+            boxesKeys.append(key)
+            count += 1
 
-        for key in boxes[box_num]:
-            explore(key)
+    index = 0
+    while index < len(boxesKeys):
+        keys = boxesKeys[index]
+        for key in boxes[keys]:
+            if key not in boxesKeys and 0 < key < len_boxes:
+                boxesKeys.append(key)
+                count += 1
+        index += 1
 
-    # Start exploring from the first box (box 0).
-    explore(0)
-
-    # Return True if all boxes have been visited (opened), False otherwise.
-    return len(visited) == len(boxes)
+    return count == len_boxes - 1
