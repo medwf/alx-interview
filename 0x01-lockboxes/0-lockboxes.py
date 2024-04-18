@@ -21,7 +21,7 @@ def canUnlockAll(boxes):
 
     # Function to explore keys and mark visited boxes.
     def explore(box_num):
-        if box_num in visited or box_num >= len(boxes):
+        if box_num in visited or box_num >= len(boxes) or box_num < 0:
             return
         visited.add(box_num)
 
