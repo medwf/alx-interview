@@ -4,6 +4,7 @@ create methods canUnlockAll:
     method that determines if all the boxes can be opened.
 """
 
+
 def canUnlockAll(boxes):
     """
     Check if it's possible to unlock all the boxes based on a set of keys.
