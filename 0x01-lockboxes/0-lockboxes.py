@@ -15,22 +15,16 @@ def canUnlockAll(boxes):
     Returns:
     - bool: True if all boxes can be unlocked, False otherwise.
     """
-    boxesKeys = []
-    len_boxes = len(boxes)
-    count = 0
+    n = len(boxes)
 
-    for key in boxes[0]:
-        if key not in boxesKeys and 0 < key < len_boxes:
-            boxesKeys.append(key)
-            count += 1
+    # The first box boxes[0] is unlocked
+    keys = [0]
 
-    index = 0
-    while index < len(boxesKeys):
-        keys = boxesKeys[index]
-        for key in boxes[keys]:
-            if key not in boxesKeys and 0 < key < len_boxes:
-                boxesKeys.append(key)
-                count += 1
-        index += 1
-
-    return count == len_boxes - 1
+    for index, box in enumerate(boxes):
+        # if keys does not have key should not be Open.
+        if index not in keys:
+            continue
+        for key in box:
+            if key not in keys and 0 < key < n:
+                keys.append(key)
+    return len(keys) == n
