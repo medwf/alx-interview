@@ -16,6 +16,6 @@ def validUTF8(data: List[int]):
         True if data is valid UFT8 else False
     """
     for char in data:
-        if char > 254:
+        if char > 255:
             return False
     return True
