@@ -43,4 +43,5 @@ def validUTF8(data: List[int]) -> bool:
         else:
             if countBytes(byte) != 1:
                 return False
+        NumBytes -= 1
     return NumBytes == 0
