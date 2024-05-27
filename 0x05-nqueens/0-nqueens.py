@@ -3,7 +3,7 @@
 This module have a methods:
     solving N-Queens problem:
 """
-from sys import argv
+from sys import argv, exit
 
 def checkUsage() -> int:
     """
@@ -12,18 +12,18 @@ def checkUsage() -> int:
     Return:
         n <int> : represent n chessboard.
     """
-    if len(argv) <= 1:
+    if len(argv) < 2:
         print("Usage: nqueens N")
         exit(1)
     try:
-        n = int(argv[1])
+        N = int(argv[1])
     except ValueError:
         print("N must be a number")
         exit(1)
-    if n < 4:
+    if N < 4:
         print("N must be at least 4")
         exit(1)
-    return n
+    return N
 
 class NQueen:
     """
@@ -42,6 +42,28 @@ class NQueen:
         self.N = N
         self.chessboard = [[0 for _ in range(N)] for _ in range(N)]
         self.solutions = []
+
+    def solve(self, column=0):
+        """Helps Start solving this problem"""
+        # 1. The Goal
+        """
+            starting with colum=0
+            recursive by column + 1
+            end if column == 4
+        """
+        if column == self.N:
+            # add solution to self.solutions and return
+            return
+        # 2. choice
+        for row in range(self.N):
+            # 3. constraint
+                # check if under attacks (row, col)
+                    # if not
+                    # add 1 to chessboard for queen exist
+                    # recursive by col + 1
+            # 4. undo last choice
+            # delete that 1 to 0 queen removed.
+
 
 
 
