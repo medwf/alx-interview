@@ -57,14 +57,28 @@ class NQueen:
         # 2. choice
         for row in range(self.N):
             # 3. constraint
-                # check if under attacks (row, col)
-                    # if not
-                    # add 1 to chessboard for queen exist
-                    # recursive by col + 1
+            # check if under attacks (row, column)
+            if self.underAttack():
+                return
+
+            # if not
+            # add 1 to chessboard for queen exist
+            self.chessboard[row][column] = 1
+            # recursive by column + 1
+            self.solve(column + 1)
             # 4. undo last choice
             # delete that 1 to 0 queen removed.
-
-
+            self.chessboard[row][column] = 0
+    
+    def underAttack(self) -> bool:
+        """check constraint of this problem.
+        Return:
+            True: if under attack
+            False: if not
+        """
+        Attacked = True
+        # check if it's attacked or not.
+        return Attacked
 
 
 if __name__ == "__main__":
