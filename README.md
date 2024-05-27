@@ -11,3 +11,6 @@
   You have n number of locked boxes in front of you.
   Each box is numbered sequentially from 0 to n - 1,
   each box may contain keys to the other boxes.
+
+- 0x05 NQueens :
+  The N queens puzzle is the challenge of placing N non-attacking queens on an N×N chessboard. Write a program that solves the N queens problem.
