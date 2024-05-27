@@ -13,6 +13,7 @@ This module have a methods:
 """
 from sys import argv, exit
 
+
 def checkUsage() -> int:
     """
     Check usage that require
@@ -32,6 +33,7 @@ def checkUsage() -> int:
         print("N must be at least 4")
         exit(1)
     return N
+
 
 class NQueen:
     """
@@ -59,25 +61,32 @@ class NQueen:
             recursive by column + 1
             end if column == 4
         """
+        # for i in range(self.N):
+        #     print(self.chessboard[i])
+        # print("_" * 30)
         if column == self.N:
             # add solution to self.solutions and return
+            solution = []
+            for Row in range(self.N):
+                for Column in range(self.N):
+                    if self.chessboard[Row][Column] == 1:
+                        solution.append([Row, Column])
+            self.solutions.append(solution)
             return
         # 2. choice
         for row in range(self.N):
             # 3. constraint
             # check if under attacks (row, column)
-            if self.underAttack(row, column):
-                return
+            if not self.underAttack(row, column):
+                # if not
+                # add 1 to chessboard for queen exist
+                self.chessboard[row][column] = 1
+                # recursive by column + 1
+                self.solve(column + 1)
+                # 4. undo last choice
+                # delete that 1 to 0 queen removed.
+                self.chessboard[row][column] = 0
 
-            # if not
-            # add 1 to chessboard for queen exist
-            self.chessboard[row][column] = 1
-            # recursive by column + 1
-            self.solve(column + 1)
-            # 4. undo last choice
-            # delete that 1 to 0 queen removed.
-            self.chessboard[row][column] = 0
-    
     def underAttack(self, row, column) -> bool:
         """check constraint of this problem.
         Return:
@@ -86,16 +95,21 @@ class NQueen:
         """
         Attacked = False
         # check if it's attacked or not.
-        Attacked = self.checkRow(row)
+        Attacked = self.checkRow(row, column)
         if not Attacked:
             Attacked = self.checkDiagonal(row, column)
         return Attacked
 
-    def checkRow(self, row):
+    def checkRow(self, row, column):
         """check if it under attack in same row"""
+        Sum = 0
         for i in range(self.N):
             if self.chessboard[row][i] == 1:
                 return True
+        #     Sum += self.chessboard[row][i]
+        # if Sum > 1:
+        #     return True
+        return False
 
     def checkDiagonal(self, row, colum):
         """check if it under attack in same diagonal"""
@@ -111,7 +125,7 @@ class NQueen:
 
         # 2. up, right
         rowRight = row + 1
-        columUp = colum + 1
+        columUp = colum - 1
         while rowRight < self.N and columUp > -1:
             if self.chessboard[rowRight][columUp] == 1:
                 return True
@@ -128,19 +142,25 @@ class NQueen:
             columDown += 1
 
         # 4. down right
-        rowRight = row - 1
+        rowRight = row + 1
         columDown = colum + 1
         while rowRight < self.N and columDown < self.N:
             if self.chessboard[rowRight][columDown] == 1:
                 return True
             rowRight += 1
             columDown += 1
-    
+        return False
+
 
 if __name__ == "__main__":
     N = checkUsage()
+    # N = 4
     positions_of_all_queen = NQueen(N)
+    positions_of_all_queen.solve()
+    # print(positions_of_all_queen.chessboard)
+    # print(positions_of_all_queen.solutions)
+    for sol in positions_of_all_queen.solutions:
+        print(sol)
     # print(positions_of_all_queen.N)
     # print(positions_of_all_queen.chessboard)
     # print(positions_of_all_queen.solutions)
-
