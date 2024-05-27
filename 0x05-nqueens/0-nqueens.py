@@ -57,22 +57,17 @@ class NQueen:
     def solve(self, column=0):
         """Helps Start solving this problem"""
         # 1. The Goal
-        """
-            starting with colum=0
-            recursive by column + 1
-            end if column == 4
-        """
-        # for i in range(self.N):
-        #     print(self.chessboard[i])
-        # print("_" * 30)
-        # self.positions.append(self.chessboard)
         if column == self.N:
+            position = [[0 for _ in range(self.N)] for _ in range(self.N)]
             # add solution to self.solutions and return
             solution = []
             for Row in range(self.N):
                 for Column in range(self.N):
                     if self.chessboard[Row][Column] == 1:
                         solution.append([Row, Column])
+                        position[Row][Column] = self.chessboard[Row][Column]
+            if sum(position[0]) == 1:
+                self.positions.append(position)
             self.solutions.append(solution)
             return
         # 2. choice
@@ -104,16 +99,12 @@ class NQueen:
 
     def checkRow(self, row, column):
         """check if it under attack in same row"""
-        Sum = 0
         for i in range(self.N):
             if self.chessboard[row][i] == 1:
                 return True
         #     Sum += self.chessboard[row][i]
         # if Sum > 1:
         #     return True
-            Sum += self.chessboard[row][i]
-        if Sum > 1:
-            return True
         return False
 
     def checkDiagonal(self, row, colum):
@@ -161,18 +152,29 @@ class NQueen:
         for solution in self.solutions:
             print(solution)
 
+    def resultGraph(self):
+        """print Queen position in chessboard"""
+        print("\nChessboard :\n")
+        for index, position in enumerate(self.positions):
+            print(f"\tSolution {index + 1}:")
+            for row in position:
+                for index, column in enumerate(row):
+                    if index == 0:
+                        print('\t\t', end='')
+                    if index <= self.N:
+                        print("|", end='')
+                    if column == 1:
+                        print(" Q ", end='')
+                    else:
+                        print(" . ", end='')
+                print("|")
+            print()
+
 
 if __name__ == "__main__":
     # N = checkUsage()
     positions_of_all_queen = NQueen(N=checkUsage())
     positions_of_all_queen.solve()
     positions_of_all_queen.result()
-    # print(positions_of_all_queen.chessboard)
-    # print(positions_of_all_queen.solutions)
-    # for sol in positions_of_all_queen.solutions:
-    #     print(sol)
-    # for pos in positions_of_all_queen.positions:
-    #     print(pos)
-    # print(positions_of_all_queen.N)
-    # print(positions_of_all_queen.chessboard)
-    # print(positions_of_all_queen.solutions)
+    # if you want to print graphic position plz try it.
+    # positions_of_all_queen.resultPositions()
