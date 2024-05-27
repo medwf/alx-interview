@@ -2,6 +2,14 @@
 """
 This module have a methods:
     solving N-Queens problem:
+    for N = 4
+
+    chessboard:
+
+        0  0  0  0
+        0  0  0  0
+        0  0  0  0
+        0  0  0  0
 """
 from sys import argv, exit
 
@@ -58,7 +66,7 @@ class NQueen:
         for row in range(self.N):
             # 3. constraint
             # check if under attacks (row, column)
-            if self.underAttack():
+            if self.underAttack(row, column):
                 return
 
             # if not
@@ -70,16 +78,64 @@ class NQueen:
             # delete that 1 to 0 queen removed.
             self.chessboard[row][column] = 0
     
-    def underAttack(self) -> bool:
+    def underAttack(self, row, column) -> bool:
         """check constraint of this problem.
         Return:
             True: if under attack
             False: if not
         """
-        Attacked = True
+        Attacked = False
         # check if it's attacked or not.
+        Attacked = self.checkRow(row)
+        if not Attacked:
+            Attacked = self.checkDiagonal(row, column)
         return Attacked
 
+    def checkRow(self, row):
+        """check if it under attack in same row"""
+        for i in range(self.N):
+            if self.chessboard[row][i] == 1:
+                return True
+
+    def checkDiagonal(self, row, colum):
+        """check if it under attack in same diagonal"""
+        # there is four way must be check
+        # 1. up, left
+        rowLeft = row - 1
+        columUp = colum - 1
+        while rowLeft > -1 and columUp > -1:
+            if self.chessboard[rowLeft][columUp] == 1:
+                return True
+            rowLeft -= 1
+            columUp -= 1
+
+        # 2. up, right
+        rowRight = row + 1
+        columUp = colum + 1
+        while rowRight < self.N and columUp > -1:
+            if self.chessboard[rowRight][columUp] == 1:
+                return True
+            rowRight += 1
+            columUp -= 1
+
+        # 3. down left
+        rowLeft = row - 1
+        columDown = colum + 1
+        while rowLeft > -1 and columDown < self.N:
+            if self.chessboard[rowLeft][columDown] == 1:
+                return True
+            rowLeft -= 1
+            columDown += 1
+
+        # 4. down right
+        rowRight = row - 1
+        columDown = colum + 1
+        while rowRight < self.N and columDown < self.N:
+            if self.chessboard[rowRight][columDown] == 1:
+                return True
+            rowRight += 1
+            columDown += 1
+    
 
 if __name__ == "__main__":
     N = checkUsage()
