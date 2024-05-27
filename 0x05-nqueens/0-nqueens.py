@@ -41,7 +41,7 @@ class NQueen:
         For Solving NQueens problem.
     """
 
-    def __init__(self, N: int) -> None:
+    def __init__(self, N) -> None:
         """
         initialize what we need to solve this problem.
 
@@ -52,6 +52,7 @@ class NQueen:
         self.N = N
         self.chessboard = [[0 for _ in range(N)] for _ in range(N)]
         self.solutions = []
+        self.positions = []
 
     def solve(self, column=0):
         """Helps Start solving this problem"""
@@ -64,6 +65,7 @@ class NQueen:
         # for i in range(self.N):
         #     print(self.chessboard[i])
         # print("_" * 30)
+        # self.positions.append(self.chessboard)
         if column == self.N:
             # add solution to self.solutions and return
             solution = []
@@ -109,6 +111,9 @@ class NQueen:
         #     Sum += self.chessboard[row][i]
         # if Sum > 1:
         #     return True
+            Sum += self.chessboard[row][i]
+        if Sum > 1:
+            return True
         return False
 
     def checkDiagonal(self, row, colum):
@@ -151,16 +156,23 @@ class NQueen:
             columDown += 1
         return False
 
+    def result(self):
+        """print result"""
+        for solution in self.solutions:
+            print(solution)
+
 
 if __name__ == "__main__":
-    N = checkUsage()
-    # N = 4
-    positions_of_all_queen = NQueen(N)
+    # N = checkUsage()
+    positions_of_all_queen = NQueen(N=checkUsage())
     positions_of_all_queen.solve()
+    positions_of_all_queen.result()
     # print(positions_of_all_queen.chessboard)
     # print(positions_of_all_queen.solutions)
-    for sol in positions_of_all_queen.solutions:
-        print(sol)
+    # for sol in positions_of_all_queen.solutions:
+    #     print(sol)
+    # for pos in positions_of_all_queen.positions:
+    #     print(pos)
     # print(positions_of_all_queen.N)
     # print(positions_of_all_queen.chessboard)
     # print(positions_of_all_queen.solutions)
