@@ -73,15 +73,9 @@ class NQueen:
         # 2. choice
         for row in range(self.N):
             # 3. constraint
-            # check if under attacks (row, column)
             if not self.underAttack(row, column):
-                # if not
-                # add 1 to chessboard for queen exist
                 self.chessboard[row][column] = 1
-                # recursive by column + 1
                 self.solve(column + 1)
-                # 4. undo last choice
-                # delete that 1 to 0 queen removed.
                 self.chessboard[row][column] = 0
 
     def underAttack(self, row, column) -> bool:
@@ -91,7 +85,6 @@ class NQueen:
             False: if not
         """
         Attacked = False
-        # check if it's attacked or not.
         Attacked = self.checkRow(row, column)
         if not Attacked:
             Attacked = self.checkDiagonal(row, column)
@@ -102,14 +95,10 @@ class NQueen:
         for i in range(self.N):
             if self.chessboard[row][i] == 1:
                 return True
-        #     Sum += self.chessboard[row][i]
-        # if Sum > 1:
-        #     return True
         return False
 
     def checkDiagonal(self, row, colum):
         """check if it under attack in same diagonal"""
-        # there is four way must be check
         # 1. up, left
         rowLeft = row - 1
         columUp = colum - 1
