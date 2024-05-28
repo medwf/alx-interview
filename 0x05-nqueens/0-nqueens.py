@@ -172,9 +172,8 @@ class NQueen:
 
 
 if __name__ == "__main__":
-    # N = checkUsage()
     positions_of_all_queen = NQueen(N=checkUsage())
     positions_of_all_queen.solve()
     positions_of_all_queen.result()
     # if you want to print graphic position plz try it.
-    # positions_of_all_queen.resultPositions()
+    # positions_of_all_queen.resultGraph()
