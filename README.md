@@ -14,3 +14,6 @@
 
 - 0x05 NQueens :
   The N queens puzzle is the challenge of placing N non-attacking queens on an N×N chessboard. Write a program that solves the N queens problem.
+
+- 0-starwars_api :
+  Write a script that prints all characters of a Star Wars movie
