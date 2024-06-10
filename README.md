@@ -17,3 +17,6 @@
 
 - 0-starwars_api :
   Write a script that prints all characters of a Star Wars movie
+
+- 0-rotate_2d_matrix.py:
+  Given an n x n 2D matrix, rotate it 90 degrees clockwise.
