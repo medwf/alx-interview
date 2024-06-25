@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """module island_perimeter"""
-from typing import List
+# from typing import List
 
 
-def island_perimeter(grid: List[List[int]]) -> int:
+def island_perimeter(grid):
     """
     The perimeter of the island described in grid.
 
